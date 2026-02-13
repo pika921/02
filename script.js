@@ -248,12 +248,12 @@ window.addEventListener("keydown", (event) => {
       softDrop();
       break;
     case "ArrowUp":
-    case "KeyZ":
-      turn();
+      hardDrop();
       break;
     case "Space":
       event.preventDefault();
-      hardDrop();
+    case "KeyZ":
+      turn();
       break;
     case "KeyP":
       paused = !paused;
