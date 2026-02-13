@@ -147,9 +147,19 @@ class AudioEngine {
     clearInterval(this.bgmTimer);
     this.bgmTimer = null;
   }
+
+  pauseBgm() {
+    this.stopBgm();
+  }
+
+  resumeBgm() {
+    if (!this.enabled) return;
+    this.unlock();
+  }
 }
 
 const audio = new AudioEngine();
+audioToggle.setAttribute("aria-pressed", "true");
 
 function createGrid() {
   return Array.from({ length: ROWS }, () => Array(COLS).fill(0));
@@ -313,6 +323,7 @@ function lockAndNext() {
     msgEl.textContent = "ゲームオーバー！リスタートで再挑戦✨";
     shakeBoard(14);
     audio.sfxGameOver();
+    audio.pauseBgm();
   }
 }
 
@@ -371,6 +382,7 @@ function restart() {
   comboEl.textContent = "";
   updateScore(0);
   lastTime = performance.now();
+  audio.resumeBgm();
 }
 
 function step(timestamp = 0) {
@@ -395,11 +407,17 @@ function step(timestamp = 0) {
 
 function togglePause() {
   paused = !paused;
+  if (paused) {
+    audio.pauseBgm();
+  } else {
+    audio.resumeBgm();
+  }
   msgEl.textContent = paused ? "一時停止中 ⏸" : "";
 }
 
 function triggerAction(action) {
   if (gameOver && action !== "restart") return;
+  if (paused && !["pause", "restart"].includes(action)) return;
   audio.unlock();
 
   switch (action) {
@@ -452,18 +470,20 @@ for (const btn of document.querySelectorAll("[data-action]")) {
     event.preventDefault();
     triggerAction(action);
   };
-  btn.addEventListener("click", handler);
-  btn.addEventListener("touchstart", handler, { passive: false });
+  btn.addEventListener("pointerdown", handler);
 }
 
 restartBtn.addEventListener("click", () => triggerAction("restart"));
 
 audioToggle.addEventListener("click", async () => {
-  const enabled = audioToggle.getAttribute("aria-pressed") !== "true";
+  const currentlyEnabled = audioToggle.getAttribute("aria-pressed") === "true";
+  const enabled = !currentlyEnabled;
   audioToggle.setAttribute("aria-pressed", String(enabled));
   audio.setEnabled(enabled);
   audioToggle.textContent = enabled ? "🔈 サウンドON" : "🔇 サウンドOFF";
-  await audio.unlock();
+  if (enabled) {
+    await audio.unlock();
+  }
 });
 
 window.addEventListener(
