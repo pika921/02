@@ -1,0 +1,107 @@
+:root {
+  color-scheme: dark;
+  --bg: #10131a;
+  --panel: #1a2030;
+  --line: #2a344d;
+  --text: #e8ecff;
+  --muted: #9ba7c7;
+  --accent: #64d2ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Noto Sans JP", system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at top, #182038, var(--bg));
+  color: var(--text);
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.app {
+  width: min(920px, 100%);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 2vw + 1rem, 2.3rem);
+}
+
+.subtitle {
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+.game-panel {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+canvas {
+  border: 2px solid var(--line);
+  background: #0a0d14;
+  border-radius: 8px;
+  width: min(300px, 80vw);
+  height: auto;
+}
+
+.hud {
+  display: grid;
+  gap: 12px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+#score {
+  font-size: 2rem;
+  margin: 0;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+#restart {
+  appearance: none;
+  border: none;
+  padding: 11px 14px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #73dcff, #3fbcff);
+  color: #02131f;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.message {
+  min-height: 1.5em;
+  margin-top: 12px;
+  color: #ffd48e;
+}
+
+@media (max-width: 760px) {
+  .game-panel {
+    grid-template-columns: 1fr;
+  }
+}

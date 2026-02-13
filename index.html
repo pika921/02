@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Block Drop</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <h1>Mini Block Drop</h1>
+      <p class="subtitle">テトリス風のミニゲーム</p>
+
+      <section class="game-panel">
+        <canvas id="game" width="300" height="600" aria-label="ゲーム画面"></canvas>
+
+        <aside class="hud">
+          <div class="card">
+            <h2>スコア</h2>
+            <p id="score">0</p>
+          </div>
+          <div class="card">
+            <h2>操作</h2>
+            <ul>
+              <li>← → : 移動</li>
+              <li>↓ : 高速落下</li>
+              <li>↑ / Z : 回転</li>
+              <li>Space : 一気落下</li>
+              <li>P : 一時停止</li>
+            </ul>
+          </div>
+          <button id="restart">リスタート</button>
+        </aside>
+      </section>
+
+      <p id="message" class="message"></p>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
