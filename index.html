@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Block Drop Cute Edition</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero card">
+        <h1>🧸 Mini Block Drop</h1>
+        <p class="subtitle">かわいいテトリス風ミニゲーム（スマホ操作対応）</p>
+      </header>
+
+      <section class="game-panel">
+        <div class="board-wrap card" id="boardWrap">
+          <canvas id="game" width="300" height="600" aria-label="ゲーム画面"></canvas>
+          <div id="combo" class="combo-pop" aria-live="polite"></div>
+        </div>
+
+        <aside class="hud">
+          <div class="card stat-card">
+            <h2>スコア</h2>
+            <p id="score">0</p>
+          </div>
+
+          <div class="card stat-card">
+            <h2>ライン</h2>
+            <p id="lines">0</p>
+          </div>
+
+          <div class="card">
+            <h2>操作（キーボード）</h2>
+            <ul>
+              <li>← → : 移動</li>
+              <li>↓ : 高速落下</li>
+              <li>↑ : 一気落下</li>
+              <li>Space / Z : 回転</li>
+              <li>P : 一時停止</li>
+            </ul>
+          </div>
+
+          <div class="actions">
+            <button id="restart" class="primary">リスタート</button>
+            <button id="audioToggle" class="secondary" aria-pressed="false">🔈 サウンドON</button>
+          </div>
+        </aside>
+      </section>
+
+      <section class="touch-panel card" aria-label="スマホ操作キー">
+        <h2>スマホ操作キー</h2>
+        <div class="touch-grid">
+          <button data-action="left">◀</button>
+          <button data-action="rotate">⟳</button>
+          <button data-action="right">▶</button>
+          <button data-action="down">▼</button>
+          <button data-action="drop" class="drop">⤓ 一気落下</button>
+          <button data-action="pause">⏯</button>
+        </div>
+      </section>
+
+      <p id="message" class="message"></p>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
